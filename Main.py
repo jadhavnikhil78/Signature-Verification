@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 import Preprocessor as pp
 import Model as mo
 
-Customer_Id = input('Enter Customer Id: ')
+Customer_Id = input('Enter Customer Id(between 1 to 10): ')
+# Enter customer Id between 1 to 10
 
+## INITIALIZATION ##
+# Training and Testing data location
 Train_GeniuneData = 'data/training/Geniune/'+str(Customer_Id)
 Train_ForgedData = 'data/training/Forgeries/'+str(Customer_Id)
 
@@ -18,6 +21,7 @@ Training_Y = []
 Testing_X = []
 Testing_Y = []
 
+## DATA PREPROCESSING AND LOADING ##
 for FileName in os.listdir(Train_GeniuneData):
     Im = plt.imread(os.path.join(Train_GeniuneData, FileName), 0)
     #Preprocessing the Train data for Geniune Signature
@@ -59,4 +63,5 @@ Training_Y = np.array(Training_Y)
 Testing_X = np.array(Testing_X)
 Testing_Y = np.array(Testing_Y)
 
+## VERIFICATION ##
 mo.LogisticRegression(Training_X, Training_Y, Testing_X, Testing_Y)
