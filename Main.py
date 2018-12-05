@@ -9,8 +9,8 @@ Customer_Id = input('Enter Customer Id: ')
 Train_GeniuneData = 'data/training/Geniune/'+str(Customer_Id)
 Train_ForgedData = 'data/training/Forgeries/'+str(Customer_Id)
 
-Testing_GeniuneData = 'data/training/Geniune/'+str(Customer_Id)
-Testing_ForgedData = 'data/training/Forgeries/'+str(Customer_Id)
+Testing_GeniuneData = 'data/testing/Geniune/'+str(Customer_Id)
+Testing_ForgedData = 'data/testing/Forgeries/'+str(Customer_Id)
 
 Training_X = []
 Training_Y = []
