@@ -6,7 +6,7 @@ def LogisticRegression(Training_X, Training_Y, Testing_X, Testing_Y, display = F
     # Begin building the model framework
     # Declare the variables that need to be learned and initialization
     # There are 4 features here, A's dimension is (4, 1)
-    A = tf.Variable(tf.random_normal(shape=[901, 2]))
+    A = tf.Variable(tf.random_normal(shape=[905, 2]))
     b = tf.Variable(tf.random_normal(shape=[2]))
     init = tf.global_variables_initializer()
     sess = tf.Session()
@@ -15,7 +15,7 @@ def LogisticRegression(Training_X, Training_Y, Testing_X, Testing_Y, display = F
 
 
     # Define placeholders
-    data = tf.placeholder(dtype=tf.float32, shape=[None, 901])
+    data = tf.placeholder(dtype=tf.float32, shape=[None, 905])
     target = tf.placeholder(dtype=tf.float32, shape=[None, 2])
 
     # Declare the model you need to learn
@@ -29,7 +29,7 @@ def LogisticRegression(Training_X, Training_Y, Testing_X, Testing_Y, display = F
 
     # Define the learning rate， batch_size etc.
     learning_rate = 0.001
-    batch_size = 30
+    batch_size = 45
     iter_num = 1500
 
     # Define the optimizer

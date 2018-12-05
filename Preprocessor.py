@@ -22,8 +22,40 @@ def preprocessing(input):
     lines = np.sum(increase_resolution, axis=1)  # sum of all lines
     h, w = img.shape
     aspect_ratio = w / h
+    
+    #calculate projections along the x and y axes
+    xp = np.sum(increase_resolution,axis=0)
+    yp = np.sum(increase_resolution,axis=1)
+    
+    height, width = increase_resolution.shape
+    x = range(width)  # cols value
+    y = range(height)  # rows value
+    
+    #centroid
+    cx = np.sum(x*xp)/np.sum(xp)
+    cy = np.sum(y*yp)/np.sum(yp)
+    
+    #standard deviation
+    x2 = (x-cx)**2
+    y2 = (y-cy)**2
+    sx = np.sqrt(np.sum(x2*xp)/np.sum(increase_resolution))
+    sy = np.sqrt(np.sum(y2*yp)/np.sum(increase_resolution))
+    
+    #skewness
+    x3 = (x-cx)**3
+    y3 = (y-cy)**3
+    skewx = np.sum(xp*x3)/(np.sum(increase_resolution) * sx**3)
+    skewy = np.sum(yp*y3)/(np.sum(increase_resolution) * sy**3)
+    
+    #Kurtosis
+    x4 = (x-cx)**4
+    y4 = (y-cy)**4
+    
+    # 3 is subtracted to calculate relative to the normal distribution
+    kurtx = np.sum(xp*x4)/(np.sum(increase_resolution) * sx**4) - 3
+    kurty = np.sum(yp*y4)/(np.sum(increase_resolution) * sy**4) - 3
 
-    return [*raveled_img, *columns, *lines, aspect_ratio]
+    return [*raveled_img, *columns, *lines, skewx, skewy, kurtx, kurty, aspect_ratio]
 
 def signature_crop(img):
     points = cv2.findNonZero(img)
